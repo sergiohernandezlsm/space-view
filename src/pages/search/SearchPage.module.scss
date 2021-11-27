@@ -1,0 +1,13 @@
+@import "../../assets/scss/variables.scss";
+
+.searchPageWrapper {
+  padding-top: 30px;
+  @media only screen and (min-width: $sm-screen) {
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+}
