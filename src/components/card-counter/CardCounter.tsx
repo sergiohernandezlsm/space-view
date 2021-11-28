@@ -1,13 +1,17 @@
+import { useContext } from "react";
+import AssetsContext from "../../store/assets-context";
 import Card from "../card";
 import styles from "./CardCounter.module.scss";
-
-const array = [1, 2, 3, 4, 5, 6, 7, 8];
+import LinkWrapper from "../link-wrapper";
 
 const CardCounter = () => {
+  const ctx = useContext(AssetsContext);
   return (
     <div className={styles.counterWrapper}>
-      {array.map((x: any) => (
-        <Card cardWidth={3} key={x} />
+      {ctx.assets.map((x: any) => (
+        <LinkWrapper nasaId={x.nasaId} key={x.nasaId}>
+          <Card imageLocation={x.image} cardWidth={3} />
+        </LinkWrapper>
       ))}
     </div>
   );

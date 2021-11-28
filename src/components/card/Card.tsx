@@ -5,13 +5,14 @@ import styles from "./Card.module.scss";
 
 export interface Props {
   cardWidth: number;
+  imageLocation: any;
 }
 
 const CardComponent: React.FC<Props> = (props) => {
   return (
     <Col sm={props.cardWidth}>
       <Card className={styles.cardWrapper}>
-        <Card.Img variant="top" src="http://via.placeholder.com/640x360" />
+        <Card.Img variant="top" src={props.imageLocation} />
       </Card>
     </Col>
   );
