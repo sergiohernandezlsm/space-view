@@ -15,18 +15,21 @@ const AssetPage = () => {
   const { id } = useParams<ParamTypes>();
 
   useEffect(() => {
-    if (id) {
+    if (ctx.assetData.mediaType === "image") {
       ctx.getMetaData(id);
-      ctx.getAssetImage(id);
     }
-  }, []);
+  }, [ctx.assetData.mediaType]);
 
   return (
     <Container className={styles.assetPageWrapper}>
       <Row>
         <h1>{ctx.assetMetaData.title}</h1>
         <p>{ctx.assetMetaData.description}</p>
-        <Card imageLocation={ctx.assetImage} cardWidth={12} />
+        <Card
+          imageLocation={ctx.assetData.href}
+          cardWidth={12}
+          mediaType={ctx.assetData.mediaType}
+        />
       </Row>
     </Container>
   );

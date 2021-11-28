@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 interface Props {
-  nasaId: string;
+  nasaId?: string;
 }
 
 const LinkWrapper: React.FC<Props> = (props) => (

@@ -29,14 +29,20 @@ const useHttpGetAssets = () => {
     try {
       const response = await axios.get(`${url}`);
       const data = response.data.collection.items.map((item: any) => {
+        const items = {
+          nasaId: item.data[0].nasa_id,
+          collection: item.href,
+          mediaType: item.data[0].media_type,
+        };
+
         if (item.data[0].media_type === "image") {
           return {
-            nasaId: item.data[0].nasa_id,
+            ...items,
             image: item.links[0].href,
           };
         }
         return {
-          nasaId: item.data[0].nasa_id,
+          ...items,
           image: "http://via.placeholder.com/640x360",
         };
       });

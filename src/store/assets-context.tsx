@@ -1,39 +1,47 @@
 import React from "react";
 import useGetAssets from "../hook/useGetAssets";
 import useGetAssetMetaData from "../hook/useGetAssetMetaData";
-import useGetAssetImage from "../hook/useGetAssetImage";
+import useGetAssetData from "../hook/useGetAssetData";
 
 const AssetsContext = React.createContext({
   assets: [],
-  assetImage: {},
+  assetData: {
+    href: "",
+    mediaType: "",
+  },
   assetMetaData: {
     title: "",
     description: "",
+    mediaType: "",
   },
   sendRequest: () => {},
   getMetaData: (_id: any) => {},
-  getAssetImage: (_id: any) => {},
+  getAssetData: (_url: any, _mediaType: string | undefined) => {},
   inputOnChangeHandler: (_e: React.ChangeEvent<HTMLInputElement>) => {},
 });
 
 export const AssetsContextProvider: React.FC = ({ children }) => {
   const { assets, sendRequest, inputOnChangeHandler } = useGetAssets();
   const { metaData, getMetaData } = useGetAssetMetaData();
-  const { assetImage, getAssetImage } = useGetAssetImage();
+  const { assetData, getAssetData } = useGetAssetData();
 
   return (
     <AssetsContext.Provider
       value={{
         assets: assets,
-        assetImage: assetImage.url,
+        assetData: {
+          href: assetData.url,
+          mediaType: assetData.mediaType,
+        },
         assetMetaData: {
           title: metaData.title,
           description: metaData.description,
+          mediaType: metaData.mediaType,
         },
         sendRequest,
         inputOnChangeHandler,
         getMetaData,
-        getAssetImage,
+        getAssetData,
       }}
     >
       {children}

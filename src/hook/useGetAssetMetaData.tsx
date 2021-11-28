@@ -5,6 +5,7 @@ const useGetAssetMetaData = () => {
   const [metaData, setMetaData] = useState({
     title: "",
     description: "",
+    mediaType: "",
   });
 
   const getMetaData = useCallback(async (id) => {
@@ -15,6 +16,7 @@ const useGetAssetMetaData = () => {
       setMetaData({
         title: response.data["XMP:Title"],
         description: response.data["XMP:Description"],
+        mediaType: response.data["AVAIL:MediaType"],
       });
     } catch (error) {
       console.error(error);
