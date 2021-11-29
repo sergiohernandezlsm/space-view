@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useHttpGetAssets should render useHttpGetAssets hook with properties 1`] = `
+Object {
+  "assets": Array [
+    "test",
+  ],
+  "inputOnChangeHandler": [Function],
+  "sendRequest": [MockFunction],
+}
+`;

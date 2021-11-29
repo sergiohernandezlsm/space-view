@@ -8,16 +8,25 @@ const useGetAssetMetaData = () => {
     mediaType: "",
   });
 
-  const getMetaData = useCallback(async (id) => {
+  const getMetaData = useCallback(async (id, type) => {
     try {
       const response = await axios.get(
-        `https://images-assets.nasa.gov/image/${id}/metadata.json`
+        `https://images-assets.nasa.gov/${type}/${id}/metadata.json`
       );
-      setMetaData({
-        title: response.data["XMP:Title"],
-        description: response.data["XMP:Description"],
-        mediaType: response.data["AVAIL:MediaType"],
-      });
+      if (type === "audio") {
+        setMetaData({
+          title: response.data["AVAIL:Title"],
+          description: response.data["AVAIL:Title"],
+          mediaType: response.data["AVAIL:MediaType"],
+        });
+      }
+      if (type === "image") {
+        setMetaData({
+          title: response.data["XMP:Title"],
+          description: response.data["XMP:Description"],
+          mediaType: response.data["AVAIL:MediaType"],
+        });
+      }
     } catch (error) {
       console.error(error);
     }

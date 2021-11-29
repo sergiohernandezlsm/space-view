@@ -53,7 +53,7 @@ const useHttpGetAssets = () => {
   }, [formValues]);
 
   const inputOnChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormValues((prevState: any) => {
+    setFormValues((prevState) => {
       return {
         ...prevState,
         [e.target.name]:

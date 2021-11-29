@@ -20,7 +20,7 @@ const SearchForm: React.FC<Props> = (props) => {
               size="lg"
               type="text"
               name="keyWord"
-              placeholder="Large text"
+              placeholder="Add keyword"
               onChange={props.inputOnChangeHandler}
             />
             <Button type="button" onClick={props.sendRequest}>

@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Card from "../../components/card";
+import AudioCard from "../../components/audioCard";
+import useGetAssetMetaData from "../../hook/useGetAssetMetaData";
 import styles from "./AssetPage.module.scss";
 
 export interface ParamTypes {
@@ -11,25 +13,29 @@ export interface ParamTypes {
 }
 
 const AssetPage = () => {
+  const { metaData, getMetaData } = useGetAssetMetaData();
   const ctx = useContext(AssetsContext);
   const { id } = useParams<ParamTypes>();
 
   useEffect(() => {
-    if (ctx.assetData.mediaType === "image") {
-      ctx.getMetaData(id);
+    if (ctx.assetData.mediaType) {
+      getMetaData(id, ctx.assetData.mediaType);
     }
-  }, [ctx.assetData.mediaType]);
+  }, [ctx.assetData.mediaType, getMetaData, id]);
+
+  const card =
+    ctx.assetData.mediaType === "image" ? (
+      <Card imageLocation={ctx.assetData.href} />
+    ) : (
+      <AudioCard href={ctx.assetData.href} />
+    );
 
   return (
     <Container className={styles.assetPageWrapper}>
       <Row>
-        <h1>{ctx.assetMetaData.title}</h1>
-        <p>{ctx.assetMetaData.description}</p>
-        <Card
-          imageLocation={ctx.assetData.href}
-          cardWidth={12}
-          mediaType={ctx.assetData.mediaType}
-        />
+        <h1>{metaData.title}</h1>
+        <p>{metaData.description}</p>
+        {card}
       </Row>
     </Container>
   );
